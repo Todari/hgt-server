@@ -40,7 +40,7 @@ func (r repository) UpdateProperty(ctx context.Context, studentId string, proper
 	if err != nil {
 		return model.Property{}, ErrUserNotFound
 	}
-	in := bson.M{"userId": primitive.ObjectID(result.ID), "smoke": property.Smoke, "height": property.Height, "religion": property.Religion, "p": property.P}
+	in := bson.M{"userId": primitive.ObjectID(result.ID), "smoke": property.Smoke, "height": property.Height, "religion": property.Religion, "keywords": property.Keywords, "properties": property.Properties}
 	fmt.Println("in", in)
 	out, err := r.db.
 		Collection("property").
@@ -55,12 +55,13 @@ func (r repository) UpdateProperty(ctx context.Context, studentId string, proper
 }
 
 type property struct {
-	ID       primitive.ObjectID `bson:"_id,omitempty"`
-	UserID   primitive.ObjectID `bson:"userId,omitempty"`
-	Smoke    string             `bson:"smoke, omitempty"`
-	Height   string             `bson:"height, omitempty"`
-	Religion string             `bson:"religion, omitempty"`
-	P        []string           `bson:"p,omitempty"`
+	ID         primitive.ObjectID `bson:"_id,omitempty"`
+	UserID     primitive.ObjectID `bson:"userId,omitempty"`
+	Smoke      string             `bson:"smoke, omitempty"`
+	Height     string             `bson:"height, omitempty"`
+	Religion   string             `bson:"religion, omitempty"`
+	Keywords   []string           `bson:"kewywords,omitempty"`
+	Properties []string           `bson:"properties,omitempty"`
 }
 
 func fromModelProperty(in model.Property) property {
@@ -70,21 +71,23 @@ func fromModelProperty(in model.Property) property {
 	}
 	// fmt.Println(UserID)
 	return property{
-		UserID:   UserID,
-		Smoke:    in.Smoke,
-		Height:   in.Height,
-		Religion: in.Religion,
-		P:        in.P,
+		UserID:     UserID,
+		Smoke:      in.Smoke,
+		Height:     in.Height,
+		Religion:   in.Religion,
+		Keywords:   in.Keywords,
+		Properties: in.Properties,
 	}
 }
 
 func toModelProperty(in property) model.Property {
 	return model.Property{
-		ID:       in.ID.String(),
-		UserID:   in.UserID.String(),
-		Smoke:    in.Smoke,
-		Height:   in.Height,
-		Religion: in.Religion,
-		P:        in.P,
+		ID:         in.ID.String(),
+		UserID:     in.UserID.String(),
+		Smoke:      in.Smoke,
+		Height:     in.Height,
+		Religion:   in.Religion,
+		Keywords:   in.Keywords,
+		Properties: in.Properties,
 	}
 }
