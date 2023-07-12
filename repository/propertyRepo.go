@@ -40,7 +40,7 @@ func (r repository) UpdateProperty(ctx context.Context, studentId string, proper
 	if err != nil {
 		return model.Property{}, ErrUserNotFound
 	}
-	in := bson.M{"userId": primitive.ObjectID(result.ID), "smoke": property.Smoke, "height": property.Height, "religion": property.Religion, "keywords": property.Keywords, "properties": property.Properties}
+	in := bson.M{"userId": primitive.ObjectID(result.ID), "smoke": property.Smoke, "height": property.Height, "religion": property.Religion, "keywords": property.Keywords, "hobbies": property.Hobbies}
 	fmt.Println("in", in)
 	out, err := r.db.
 		Collection("property").
