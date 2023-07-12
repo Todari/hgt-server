@@ -55,13 +55,13 @@ func (r repository) UpdateProperty(ctx context.Context, studentId string, proper
 }
 
 type property struct {
-	ID         primitive.ObjectID `bson:"_id,omitempty"`
-	UserID     primitive.ObjectID `bson:"userId,omitempty"`
-	Smoke      string             `bson:"smoke, omitempty"`
-	Height     string             `bson:"height, omitempty"`
-	Religion   string             `bson:"religion, omitempty"`
-	Keywords   []string           `bson:"kewywords,omitempty"`
-	Properties []string           `bson:"properties,omitempty"`
+	ID       primitive.ObjectID `bson:"_id,omitempty"`
+	UserID   primitive.ObjectID `bson:"userId,omitempty"`
+	Smoke    string             `bson:"smoke, omitempty"`
+	Height   string             `bson:"height, omitempty"`
+	Religion string             `bson:"religion, omitempty"`
+	Keywords []string           `bson:"keywords,omitempty"`
+	Hobbies  []string           `bson:"hobbies,omitempty"`
 }
 
 func fromModelProperty(in model.Property) property {
@@ -71,23 +71,23 @@ func fromModelProperty(in model.Property) property {
 	}
 	// fmt.Println(UserID)
 	return property{
-		UserID:     UserID,
-		Smoke:      in.Smoke,
-		Height:     in.Height,
-		Religion:   in.Religion,
-		Keywords:   in.Keywords,
-		Properties: in.Properties,
+		UserID:   UserID,
+		Smoke:    in.Smoke,
+		Height:   in.Height,
+		Religion: in.Religion,
+		Keywords: in.Keywords,
+		Hobbies:  in.Hobbies,
 	}
 }
 
 func toModelProperty(in property) model.Property {
 	return model.Property{
-		ID:         in.ID.String(),
-		UserID:     in.UserID.String(),
-		Smoke:      in.Smoke,
-		Height:     in.Height,
-		Religion:   in.Religion,
-		Keywords:   in.Keywords,
-		Properties: in.Properties,
+		ID:       in.ID.String(),
+		UserID:   in.UserID.String(),
+		Smoke:    in.Smoke,
+		Height:   in.Height,
+		Religion: in.Religion,
+		Keywords: in.Keywords,
+		Hobbies:  in.Hobbies,
 	}
 }
